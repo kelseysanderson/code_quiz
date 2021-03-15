@@ -15,16 +15,16 @@
     </header>
 
     <div class = "title" id = "main">
-        <h1>JavaScript Quiz</h1>
+        <h1 id = "titleText">JavaScript Quiz</h1>
             <div class = "container">                
-                <ul>
-                <div id = "instructions"><li >Test your JavaScript knowledge:</li></div>
-                <div id = "instructions"> <li>You have 60 seconds to complete this quiz. </li></div>
-                <div id = "instructions"><li>Each time you answer incorrectly 10 seconds will be subtracted from the time.<li></div> 
-                <div id = "instructions"><li>Try to get a spot on the high score list!</li></div>                
+                <ul id = "list">
+                    <div id = "instructions"><li >Test your JavaScript knowledge:</li></div>
+                    <div id = "instructions"> <li>You have 60 seconds to complete this quiz. </li></div>
+                    <div id = "instructions"><li>Each time you answer incorrectly 10 seconds will be subtracted from the time.<li></div> 
+                    <div id = "instructions"><li>Try to get a spot on the high score list!</li></div>                
                 </ul> 
             </div>
-            
+
             <button type = "button" id = "start">Start Quiz</button>
     </div>
  
@@ -32,10 +32,10 @@
         <h1 id = "question"></h1>
             <div class = "container">
                 <ul class = "answers">
-                    <button type = "button"><li id ="answer_a_btn"></li></button>
-                    <button type = "button"><li id ="answer_b_btn"></li></button>
-                    <button type = "button"><li id ="answer_c_btn"></li></button>
-                    <button type = "button"><li id ="answer_d_btn"></li></button>
+                    <button type = "button" id="answer_a_btn"></button>
+                    <button type = "button" id ="answer_b_btn"></button>
+                    <button type = "button" id ="answer_c_btn"></button>
+                    <button type = "button" id ="answer_d_btn"></button>
                 </ul>
             </div>       
     </div>

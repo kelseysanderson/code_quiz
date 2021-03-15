@@ -11,6 +11,8 @@ var timerEl = document.getElementById("timer");
 
 //title page
 var mainEl = document.getElementById("main");
+var titleText = document.getElementById("titleText");
+var mainList = document.getElementById("list");
 
 //start button
 var startBtn = document.getElementById("start");
@@ -28,108 +30,124 @@ var b = document.getElementById("answer_b_btn")
 var c = document.getElementById("answer_c_btn")
 var d = document.getElementById("answer_d_btn")
 
-var questions = [{
-    question:"who?",
-    correct: "me",
-    a: "me",
-    b: "you",
-    c: "them",
+
+var questions = [
+    {
+    question:"What is not a data type in JavaScript?",
+    correct: "Tags",
+    a: "Tags",
+    b: "Arrays",
+    c: "Numbers",
+    d: "Boolean",
+    },
+    {
+    question:"What?",
+    correct: "fjkel",
+    a: "hello",
+    b: "fjkel",
+    c: "Numbers",
+    d: "Boolean",
+    },
+    {
+    question:"Who?",
+    correct: "you",
+    a: "them",
+    b: "me",
+    c: "you",
     d: "her",
-}]
+    },
+    {
+    question:"What?",
+    correct: "fjkel",
+    a: "Tags",
+    b: "fjkel",
+    c: "Numbers",
+    d: "Boolean",
+    },
+    {
+    question:"Who?",
+    correct: "you",
+    a: "them",
+    b: "me",
+    c: "you",
+    d: "her",
+    },
+]
+
+
+
 
 var currentQuestion = 0;
+var totalQuestions = 4;
+var stopTimer;
 
 function pressButton(){
     quizPage.style.visibility = "hidden"
 
     startBtn.addEventListener("click", function(){
         startTimer(); 
-        swapContent();
+        startQuestions();
     });
 }
 
 function startTimer(){
     var timeInterval = setInterval(function(){
-        if (timeRemaining > 1){
+        if (timeRemaining >= 0){
             timerEl.textContent = timeRemaining + " second(s) remain";
             timeRemaining--;         
-        } else{
-            timerEl.textContent = '';
+        }else{
+            timerEl.textContent = 'Time\'s Up!';
             clearInterval(timeInterval);
+            finalPage();
         }
     }, 1000);
 }
 
-function swapContent(){
-
+function startQuestions(){
     mainEl.replaceWith(quizPage);
-
     quizPage.style.visibility = "visible";
-
+    var answersArray = [a, b, c, d];  
+    for (var i=0; i < answersArray.length; i++){
+        answersArray[i].addEventListener("click", function(){            
+            if (this.innerHTML == questions[currentQuestion].correct && currentQuestion == 4){
+                score ++;
+                finalPage();
+            }else if (this.innerHTML != questions[currentQuestion].correct && currentQuestion == 4){
+                finalPage();
+            }else if (this.innerHTML == questions[currentQuestion].correct){
+                console.log("Correct answer");
+                score++;
+                currentQuestion = currentQuestion + 1;
+                populate();
+            } else if( this.innerHTML !== questions[currentQuestion].correct){
+                console.log("Incorrect answer");
+                timeRemaining -= 10;
+                currentQuestion = currentQuestion + 1;
+                populate();               
+            } 
+        }) 
+    }
     populate();
-
 }
 
 function populate(){
-    //replace 0 with current quest var
-    questionElement.innerHTML = questions[currentQuestion].question;
+   console.log(currentQuestion)
+   questionElement.innerHTML = questions[currentQuestion].question;
     a.innerHTML = questions[currentQuestion].a;
     b.innerHTML = questions[currentQuestion].b;
     c.innerHTML = questions[currentQuestion].c;
     d.innerHTML = questions[currentQuestion].d;
     
-    a.addEventListener("click", function(){
-        //compare the button text of clicked button to correct answer
-        if (a.innerHTML == questions[0].correct){
-            score++;
-            console.log(score);
-        } else {
-            console.log("hi")
-        }
-    })
+}
 
-    b.addEventListener("click", function(){
-        //compare the button text of clicked button to correct answer
-        if (b.innerHTML == questions[0].correct){
-            score++;
-            console.log(score);
-        } else {
-            timeRemaining -= 10;
-        }
-
-        
-    })
-
-    c.addEventListener("click", function(){
-        //compare the button text of clicked button to correct answer
-        if (c.innerHTML == questions[0].correct){
-            score++;
-            console.log(score);
-        } else {
-            timeRemaining -= 10;
-        }
-
-        
-    })
-
-    d.addEventListener("click", function(){
-        //compare the button text of clicked button to correct answer
-        if (d.innerHTML == questions[0].correct){
-            score++;
-            console.log(score);
-        } else {
-            timeRemaining -= 10;
-        }
-
-        
-    })
-
-
-
-    // a.innerHTML = questionOne[2].A;
-
+function finalPage(){
+    quizPage.replaceWith(mainEl);
+    titleText.textContent = "Results";
+    mainList.textContent = "Score: " + score
+    mainList.setAttribute("style", "padding:30px;")
 }
 
 pressButton();
 
 
+//high score sheet - try again
