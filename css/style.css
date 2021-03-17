@@ -14,6 +14,14 @@ header{
     justify-content:space-between;
     padding: 30px;
 }
+#high-score-link{
+    color:blue;
+    text-decoration:underline blue;
+}
+
+#high-score-link:hover{
+    cursor:pointer;
+}
 
 .title{
     display:flex;
@@ -22,7 +30,7 @@ header{
     padding:20px;
     height:600px;
 }
-
+/*main title box*/
 .title h1{
     font-size: 40px;
     font-weight: bold;
@@ -35,18 +43,17 @@ header{
     text-align: center;
 }
 
-
-
+/*main title text*/
 .title ul li {
     margin-top:20px;
     margin-bottom:20px;
     text-align:center;
 }
-
+/*main page instructions*/
 #instructions{
     color:#1e3361;
 }
-
+/*container (answers/instructions*/
 .container {
     min-width:350px;
     max-width: 600px;
@@ -89,10 +96,10 @@ button li{
     color: white;
 }
 
-label{
+/* label{
     font-weight:bold;
     text-align: center;
-}
+} */
  
 form {
     display: flex;
@@ -101,18 +108,6 @@ form {
     flex-wrap:wrap;
 
 }
-
-#user-list{
-    display:flex;
-    flex-direction: column;
-    font-size: 20px;
-    padding-bottom: 10px;
-    padding-top:10px;
-    background-color: #a0b3dd;
-    border:3px solid #2b457e;
-    margin: 10px 50px 10px 50px;
-}
-
 /*final page submit button*/
 #submitBtn{
     background-color: #2b457e;
@@ -130,4 +125,16 @@ form {
     color:white;
     border: 2px solid white; 
 }
+/* high score page user scores*/
+#user-list{
+    display:flex;
+    flex-direction: column;
+    font-size: 20px;
+    padding-bottom: 10px;
+    padding-top:10px;
+    background-color: #a0b3dd;
+    border:3px solid #2b457e;
+    margin: 10px 50px 10px 50px;
+}
+
 
