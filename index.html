@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="./css/style.css"/>
 </head>
 <body>
-    <header>
-        <p>view high scores</p>
+    <header id = header>
+        <p id = "high-score-link">View High Scores</p>
         <p id = "timer"></p>    
     </header>
 
@@ -18,10 +18,10 @@
         <h1 id = "titleText">JavaScript Quiz</h1>
             <div class = "container">                
                 <ul id = "list">
-                    <div id = "instructions"><li >Test your JavaScript knowledge:</li></div>
-                    <div id = "instructions"> <li>You have 60 seconds to complete this quiz. </li></div>
-                    <div id = "instructions"><li>Each time you answer incorrectly 10 seconds will be subtracted from the time.<li></div> 
-                    <div id = "instructions"><li>Try to get a spot on the high score list!</li></div>                
+                    <div id = "instructions"><li id = listOne>Test your JavaScript knowledge:</li></div>
+                    <div id = "instructions"> <li id = listTwo>You have 60 seconds to complete this quiz. </li></div>
+                    <div id = "instructions"><li id = listThree>Each time you answer incorrectly 10 seconds will be subtracted from the time.<li></div> 
+                    <div id = "instructions"><li id = listFour>Try to get a spot on the high score list!</li></div>                
                 </ul> 
             </div>
 
@@ -40,6 +40,11 @@
             </div>       
     </div>
 
+    <div class = "high-scores">
+        <p></p>
+        <ul id = "user-scores">
+        </ul>
+    </div>
     <script src="./js/script.js"></script>
 </body>
 </html>
