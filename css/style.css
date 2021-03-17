@@ -95,11 +95,6 @@ button:hover{
 button li{
     color: white;
 }
-
-/* label{
-    font-weight:bold;
-    text-align: center;
-} */
  
 form {
     display: flex;
@@ -110,13 +105,18 @@ form {
 }
 /*final page submit button*/
 #submitBtn{
+    display:flex;
+    align-self:center;
+    text-align:center;
+    padding:10px 30px;
+    margin-top:20px;
+    max-width: 200px;
+    font-weight:bold;
     background-color: #2b457e;
-    padding:5px 8px 5px 8px;
-    border:3px #cad9f8 solid;
-    border-radius: 5px;
-    color: white;
-    margin-left: 20px;
-    margin-top: 20px;
+    color:white;
+    border: 3px solid #a0b3dd;
+    border-radius: 10px;
+    font-size:20px;
 }
 
 #submitBtn:hover{
@@ -132,9 +132,11 @@ form {
     font-size: 20px;
     padding-bottom: 10px;
     padding-top:10px;
+    padding-left:20px;
     background-color: #a0b3dd;
     border:3px solid #2b457e;
     margin: 10px 50px 10px 50px;
 }
+
 
 

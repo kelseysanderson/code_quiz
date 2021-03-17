@@ -1,19 +1,13 @@
-//start quiz function
-    //button needs to start timer and quiz questions
-
 var score = 0
 var timeRemaining = 60;
-var currentQuestion = 4;
-var totalQuestions = 4;
+var currentQuestion = 0;
+var totalQuestions = 0;
 var timeInterval = null;
-
+//body
 var body = document.querySelector("body");
-
 //header
 var timerEl = document.getElementById("timer");
 var highScoreLink = document.getElementById("high-score-link");
-
-
 //title page
 var startBtn = document.getElementById("start");
 var mainEl = document.getElementById("main");
@@ -26,46 +20,38 @@ var listOne = document.getElementById("listOne");
 var listTwo = document.getElementById("listTwo");
 var listThree = document.getElementById("listThree");
 var listFour = document.getElementById("listFour");
-//highScorePage
-var highScorePage = document.getElementById("high-scores");
 //form variables for finalPage
 var form = document.createElement("form");
 var label = document.createElement("label");
 var form = document.createElement("form");
 var label = document.createElement("label");
 var submit = document.createElement("button");
-
-//question
+//highScorePage
+var highScorePage = document.getElementById("high-scores");
+//quiz question element
 var questionElement = document.getElementById("question");
-
-//answers
+//answer element
 var answers = document.getElementById("answers");
-
-//answers
+//individual answer buttons
 var a = document.getElementById("answer_a_btn");
 var b = document.getElementById("answer_b_btn");
 var c = document.getElementById("answer_c_btn");
 var d = document.getElementById("answer_d_btn");
-
+//user high score empty object
 var userHighScore = {
     init:"" ,
     scr:"" ,
 }
-
-//creating variable that is the local storage for high scores ("high-scores")-label that will show up as "key"
+var userScores = document.getElementById("user-scores")
+//storage
 var userInfo = localStorage.getItem("high-scores")
-
+//if nothing is typed in box, it is empty
 if (userInfo == null){
     userInfo = [];
 }else{
     userInfo = JSON.parse(userInfo);
 }
-
-
-var userScores = document.getElementById("user-scores")
-
-var gameOver = false 
-
+//question object array
 var questions = [
     {
     question:"1. What is not a data type in JavaScript?",
@@ -149,11 +135,8 @@ var questions = [
     },
 ]
 
-
-
 function pressButton(){
-    quizPage.style.visibility = "hidden"
-
+    quizPage.style.visibility = "hidden";
     startBtn.addEventListener("click", function(){
         startTimer(); 
         startQuestions();
@@ -176,7 +159,6 @@ function startQuestions(){
     mainEl.replaceWith(quizPage);
     quizPage.style.visibility = "visible";
     var answersArray = [a, b, c, d];  
-    console.log(score)
     for (var i=0; i < answersArray.length; i++){
         answersArray[i].addEventListener("click", function(){                   
         if (this.innerHTML == questions[currentQuestion].correct && currentQuestion == 9){
@@ -185,12 +167,10 @@ function startQuestions(){
             }else if (this.innerHTML != questions[currentQuestion].correct && currentQuestion == 9){
                 finalPage();
             }else if (this.innerHTML == questions[currentQuestion].correct){
-               // console.log("Correct answer");
                 score++;
                 currentQuestion = currentQuestion + 1;
                 populate();
             } else if( this.innerHTML !== questions[currentQuestion].correct){
-                //console.log("Incorrect answer");
                 timeRemaining -= 10;
                 currentQuestion = currentQuestion + 1;
                 populate();               
@@ -211,11 +191,7 @@ function populate(){
 }
 
 function finalPage(){ 
-    clearInterval(timeInterval)
-    gameOver = true;
-    console.log(gameOver)
-    //hide timer and replace quiz page
-    // timerEl.style.visibility= "hidden";
+    clearInterval(timeInterval);
     quizPage.replaceWith(mainEl);
 
     //replace title page text with results
@@ -230,80 +206,79 @@ function finalPage(){
     label = document.createElement("label");
     input = document.createElement("input");
     submit = document.createElement("submit");
+    tryAgain = document.createElement("button");
     
     //append label input and button to form
     form.appendChild(label);
     form.appendChild(input);
-    form.appendChild(submit)
+    form.appendChild(submit);
+    form.appendChild(tryAgain);
 
+    //set attributes and add text content for form, label, input and submit
     form.setAttribute("type", "text-input;");
-
     label.setAttribute("for", "initials");
-    label.textContent = "Enter Your Initials:  "
-
+    label.textContent = "Enter Your Initials:  ";
     input.setAttribute("type", "text");
     input.setAttribute("id","initials");
     submit.setAttribute("id", "submitBtn");
     submit.setAttribute("action","");
     submit.textContent = "Submit";
+    tryAgain.setAttribute("id","try-again");
+    tryAgain.textContent = "Try Again";
 
-    //removes list items from the first page
+    //removes list items from the main page
     listThree.remove();
     listFour.remove();
     startBtn.remove();
-    header = document.getElementById("header")
-
+    header = document.getElementById("header");
+    tryAgain.addEventListener("click", function(){
+    pressButton();
+    });
+    //click on submit button, store user info
     submit.addEventListener("click", function(event){
         var initials = document.getElementById("initials");
-
         userHighScore = {
             init: initials.value,
             scr: score,
             }
-        
         userInfo.push(userHighScore)
         localStorage.setItem("high-scores", JSON.stringify(userInfo));
-
-        console.log(userHighScore)
-
         highScores();
-
-
     });      
-
 }
-        
-function highScores(){
-
-    mainEl.replaceWith(highScorePage)
-    // timerEl.remove();
-    // highScoreLink.remove();
-    // header= document.getElementById("header");
-    // header.innerHTML += "<h1> Highscores </h1>"
-
-    // for (let i = 0; i < userInfo.length; i++) {
-    //     var init = userInfo[i].init;
-    //     var scr = userInfo[i].scr;
-    //     userScores.innerHTML += "<li id = user-list>" + init + ": " + scr + "</li>"
-    // }
-    var userList = document.getElementById("user-list");
-    
-    
-   
-
-}
-
-
-
-
 
 //get stored data and display on high score page
+function highScores(){
+    quizPage.replaceWith(highScorePage);
+    mainEl.replaceWith(highScorePage);
+    timerEl.remove();
+    highScoreLink.remove();
+    header= document.getElementById("header");
+    header.innerHTML += "<h1> Highscores </h1>";
+    var clearScores = document.getElementById("clear-scores");
+    clearData= document.createElement("button");
+    clearScores.appendChild(clearData);
+    clearData.textContent = "Clear Data and Try Again";
+
+    for (let i = 0; i < userInfo.length; i++) {
+        var init = userInfo[i].init;
+        var scr = userInfo[i].scr;
+        userScores.innerHTML += "<li id = user-list>" + init + ": " + scr + "</li>"
+    }
+    clearData.addEventListener("click", function(){
+        window.localStorage.removeItem("high-scores");
+        location.reload(highScores);
+        return false;
+    });
+}
 
 
-highScoreLink.addEventListener("click", function(){
+ //go to highScore page if high score link is clicked.
+ highScoreLink.addEventListener("click", function(){
     highScores();
-});
+    });
 
+//start quiz
 pressButton();
 
 
